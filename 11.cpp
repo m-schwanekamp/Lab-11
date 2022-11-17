@@ -1,4 +1,4 @@
-// Lab 11 
+// Lab-11 
 #include <iostream>
 #include <cstdlib>
 
@@ -15,9 +15,8 @@ char seatLetter(int column);
 int main() {
     char seats[COLUMNS][ROWS];
     int row;
-    int column;
+    char column;
     int index = 0;
-
     for (int i = 0; i < COLUMNS; i++) {
         for (int j = 0; j < ROWS; j++) {
             if (i == 2) {
@@ -44,19 +43,18 @@ int main() {
     }
 
     cout << "Enter a seat or Q to quit: ";
-    cin >> row;
-    cin >> column;
 
-    while (!cin.fail()) {
+
+    while (cin >> row >> column) {
         if (column == 'C' && row == 13 || findRowIndex(row) == -1 || column == 'D' && row == 13 || findSeatIndex(column) == -1) {
-            cout << "Sorry, no such seat existss on the CRJ 200." << endl;
+            cout << "Sorry, no such seat exists on the CRJ 200." << endl;
         }
 
         else if (column == 'D' && row == 13 && column == 'C') {
             cout << "Sorry, no such seat exists on the CRJ 200." << endl;
         }
 
-        else if(seats[findSeatIndex(column)][findRowIndex(row)] == 'X') {
+        else if (seats[findSeatIndex(column)][findRowIndex(row)] == 'X') {
             cout << "Sorry, this seat is already taken." << endl;
         }
 
@@ -68,10 +66,10 @@ int main() {
             displaySeatColumn(seats, i);
         }
 
-        cout << "Enter a seat or Q to quit: ";
-        cin >> row;
-        cin >> column;
+        cout << "Enter a seat or Q to quit: \n";
+       
     }
+   
 }
 
 int findSeatIndex(char thisSeat) {
@@ -104,10 +102,13 @@ int findRowIndex(int thisRow) {
 }
 
 void displaySeatColumn(char seats[][ROWS], int column) {
+    seats[0][ROWS - 1] = ' ';
     for (int j = 0; j < ROWS; j++) {
         cout << seats[column][j];
         cout << " ";
     }
+   
+    seats[1][ROWS - 1] = ' ';
     cout << endl;
 }
 
